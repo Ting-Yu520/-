@@ -1,0 +1,139 @@
+<!-- pages/addTask/addTask.wxml -->
+<view class="container">
+  <!-- 紧凑头部 -->
+  <view class="header">
+    <text class="title">添加新任务</text>
+    <text class="subtitle">让AI帮你智能安排时间</text>
+  </view>
+
+  <form bindsubmit="submitTask" class="task-form">
+    <!-- 任务名称 - 内嵌设计 -->
+    <view class="form-group">
+      <view class="form-input-group">
+        <text class="input-label">任务名称</text>
+        <input 
+          name="title" 
+          class="form-input embedded-input" 
+          placeholder="请输入任务内容，如：完成数学作业"
+          value="{{taskData.title}}"
+          bindinput="onTitleInput"
+        />
+      </view>
+    </view>
+
+    <!-- 预计时长 - 紧凑布局 -->
+    <view class="form-group">
+      <view class="form-input-group">
+        <text class="input-label">预计时长</text>
+        <view class="duration-input-group">
+          <input 
+            name="duration" 
+            type="number" 
+            class="form-input duration-input embedded-input" 
+            placeholder="60"
+            value="{{taskData.duration}}"
+            bindinput="onDurationInput"
+          />
+          <text class="duration-unit">分钟</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 优先级 - 平铺设计 -->
+    <view class="form-group">
+      <text class="form-label">优先级</text>
+      <view class="priority-grid">
+        <view 
+          class="priority-item {{taskData.priority == 1 ? 'active low' : ''}}" 
+          data-value="1"
+          bindtap="selectPriority"
+        >
+          <text class="priority-text">低</text>
+        </view>
+        <view 
+          class="priority-item {{taskData.priority == 2 ? 'active medium-low' : ''}}" 
+          data-value="2"
+          bindtap="selectPriority"
+        >
+          <text class="priority-text">中低</text>
+        </view>
+        <view 
+          class="priority-item {{taskData.priority == 3 ? 'active medium' : ''}}" 
+          data-value="3"
+          bindtap="selectPriority"
+        >
+          <text class="priority-text">中</text>
+        </view>
+        <view 
+          class="priority-item {{taskData.priority == 4 ? 'active high' : ''}}" 
+          data-value="4"
+          bindtap="selectPriority"
+        >
+          <text class="priority-text">高</text>
+        </view>
+        <view 
+          class="priority-item {{taskData.priority == 5 ? 'active urgent' : ''}}" 
+          data-value="5"
+          bindtap="selectPriority"
+        >
+          <text class="priority-text">紧急</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 执行日期 - 内嵌设计 -->
+    <view class="form-group">
+      <view class="form-input-group">
+        <text class="input-label">执行日期</text>
+        <picker 
+          name="date" 
+          mode="date" 
+          value="{{taskData.date}}" 
+          bindchange="onDateChange"
+          class="date-picker"
+        >
+          <view class="date-display embedded-input">
+            <text class="date-text">{{taskData.date || '选择日期'}}</text>
+            <text class="calendar-icon">📅</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <button 
+      class="submit-btn {{isFormValid && !isLoading ? 'active' : ''}} {{isLoading ? 'loading' : ''}}" 
+      form-type="submit"
+      disabled="{{!isFormValid || isLoading}}"
+    >
+      {{isLoading ? '生成中...' : '生成AI日程'}}
+    </button>
+  </form>
+
+  <!-- 快捷任务模板 - 紧凑网格 -->
+  <view class="quick-templates">
+    <text class="section-title">快捷模板</text>
+    <view class="template-grid">
+      <view class="template-card" bindtap="useTemplate" data-title="学习新章节" data-duration="90">
+        <text class="template-icon">📚</text>
+        <text class="template-title">学习新章节</text>
+        <text class="template-duration">90分钟</text>
+      </view>
+      <view class="template-card" bindtap="useTemplate" data-title="完成作业" data-duration="60">
+        <text class="template-icon">✏️</text>
+        <text class="template-title">完成作业</text>
+        <text class="template-duration">60分钟</text>
+      </view>
+      <view class="template-card" bindtap="useTemplate" data-title="复习知识点" data-duration="45">
+        <text class="template-icon">📖</text>
+        <text class="template-title">复习知识点</text>
+        <text class="template-duration">45分钟</text>
+      </view>
+      <view class="template-card" bindtap="useTemplate" data-title="运动锻炼" data-duration="30">
+        <text class="template-icon">🏃</text>
+        <text class="template-title">运动锻炼</text>
+        <text class="template-duration">30分钟</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,425 @@
+/* pages/taskDetail/taskDetail.wxss */
+.container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 0;
+  position: relative;
+}
+
+/* 自定义导航栏  */
+.custom-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15rpx;
+  background: white;
+  border-bottom: 1rpx solid #f0f0f0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 80rpx;
+  box-sizing: border-box;
+}
+
+.nav-left, .nav-right {
+  width: 80rpx;
+  display: flex;
+  align-items: center;
+}
+
+.back-btn {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 16rpx;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.back-btn:active {
+  background: #1890ff;
+  transform: scale(0.95);
+}
+
+.back-icon {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.back-btn:active .back-icon {
+  color: white;
+}
+
+.nav-title {
+  flex: 1;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 滚动区域 - 修复导航栏重叠 */
+.content-scroll {
+  height: calc(100vh - 160rpx);
+  margin-top: 80rpx;
+  padding-bottom: 120rpx;
+}
+
+/* 任务基本信息卡片 */
+.task-basic-card {
+  background: white;
+  margin: 15rpx;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+.task-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 25rpx;
+}
+
+.task-title-main {
+  flex: 1;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+  margin-right: 20rpx;
+}
+
+.priority-badge-main {
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: white;
+  font-weight: bold;
+  min-width: 60rpx;
+  text-align: center;
+}
+
+.priority-1 { background: #52c41a; }
+.priority-2 { background: #87d068; }
+.priority-3 { background: #faad14; }
+.priority-4 { background: #fa8c16; }
+.priority-5 { background: #f5222d; }
+
+/* 任务元数据网格 */
+.task-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  transition: all 0.2s;
+}
+
+.meta-item:active {
+  background: #1890ff;
+  transform: scale(0.98);
+}
+
+.meta-item:active .meta-label,
+.meta-item:active .meta-value {
+  color: white;
+}
+
+.meta-icon {
+  font-size: 28rpx;
+  width: 40rpx;
+  text-align: center;
+}
+
+.meta-content {
+  flex: 1;
+}
+
+.meta-label {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 4rpx;
+}
+
+.meta-value {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.meta-value.no-schedule {
+  color: #999;
+  font-style: italic;
+}
+
+.meta-value.status-done {
+  color: #52c41a;
+}
+
+.meta-value.status-in_progress {
+  color: #1890ff;
+}
+
+.meta-value.status-pending {
+  color: #faad14;
+}
+
+/* 通用卡片样式 */
+.description-card,
+.schedule-card {
+  background: white;
+  margin: 0 15rpx 15rpx;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+.card-header {
+  margin-bottom: 20rpx;
+}
+
+.card-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 描述内容 */
+.description-content {
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.description-text {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 时间安排内容 */
+.schedule-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.schedule-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.schedule-item:last-child {
+  border-bottom: none;
+}
+
+.schedule-label {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.schedule-value {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 操作按钮区域 - 固定在底部 */
+.action-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 15rpx;
+  background: white;
+  border-top: 1rpx solid #f0f0f0;
+  display: flex;
+  gap: 15rpx;
+  z-index: 1000;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  padding: 24rpx;
+  border: none;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+}
+
+.action-btn.primary {
+  background: #1890ff;
+  color: white;
+}
+
+.action-btn.primary:active {
+  background: #096dd9;
+}
+
+.action-btn.secondary {
+  background: #52c41a;
+  color: white;
+}
+
+.action-btn.secondary:active {
+  background: #389e0d;
+}
+
+.action-btn.outline {
+  background: transparent;
+  border: 1rpx solid #1890ff;
+  color: #1890ff;
+}
+
+.action-btn.outline:active {
+  background: #f0f7ff;
+}
+
+.btn-icon {
+  font-size: 28rpx;
+}
+
+.btn-text {
+  font-size: 28rpx;
+}
+
+/* 完成状态横幅 */
+.completion-banner {
+  background: linear-gradient(135deg, #52c41a 0%, #73d13d 100%);
+  margin: 15rpx;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  color: white;
+}
+
+.completion-icon {
+  font-size: 40rpx;
+}
+
+.completion-text {
+  flex: 1;
+}
+
+.completion-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 4rpx;
+}
+
+.completion-subtitle {
+  display: block;
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+/* 错误状态 */
+.error-state {
+  padding: 120rpx 30rpx 60rpx;
+  text-align: center;
+}
+
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.error-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.error-title {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 600;
+}
+
+.error-desc {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 10rpx;
+}
+
+.error-taskid {
+  font-size: 22rpx;
+  color: #999;
+  background: #f5f5f5;
+  padding: 8rpx 16rpx;
+  border-radius: 6rpx;
+  margin-bottom: 30rpx;
+  font-family: monospace;
+}
+
+.retry-btn {
+  background: #1890ff;
+  color: white;
+  border: none;
+  padding: 20rpx 40rpx;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+/* 加载状态 */
+.loading-state {
+  padding: 120rpx 30rpx 60rpx;
+  text-align: center;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.loading-icon {
+  font-size: 60rpx;
+  margin-bottom: 20rpx;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #666;
+}

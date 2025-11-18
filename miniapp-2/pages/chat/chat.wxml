@@ -1,0 +1,114 @@
+<!-- pages/chat/chat.wxml -->
+<view class="container">
+  <!-- 顶部固定区域 -->
+  <view class="top-section">
+    <!-- 任务信息 -->
+    <view class="task-header">
+      <view class="task-info">
+        <text class="task-title">{{taskData.title}}</text>
+        <text class="task-meta">{{taskData.duration}}分钟 · 优先级{{taskData.priority}} · {{taskData.date}}</text>
+      </view>
+      <view class="ai-status">
+        <text class="status-text">AI助理在线</text>
+        <view class="status-dot"></view>
+      </view>
+    </view>
+
+    <!-- AI日程预览 -->
+    <view class="schedule-preview" wx:if="{{schedule.scheduled_start}}">
+      <view class="preview-content">
+        <view class="preview-header">
+          <text class="preview-title">📅 AI为您安排的日程</text>
+          <text class="preview-time">{{schedule.scheduled_start}} - {{schedule.scheduled_end}}</text>
+        </view>
+        <view class="preview-actions">
+          <button class="btn-accept" bindtap="acceptSchedule">接受安排</button>
+          <button class="btn-adjust" bindtap="showAdjustOptions">调整时间</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 网络错误提示 -->
+    <view class="network-error" wx:if="{{hasNetworkError}}">
+      <text class="error-text">网络连接失败，使用本地AI助手</text>
+      <button class="retry-btn" bindtap="retryLoadData">重试</button>
+    </view>
+  </view>
+
+  <!-- 聊天消息区域 - 占据主要空间 -->
+  <view class="chat-section">
+    <scroll-view class="chat-messages" scroll-y scroll-with-animation scroll-top="{{scrollTop}}">
+      <block wx:for="{{messages}}" wx:key="id">
+        <!-- AI消息 -->
+        <view class="message ai-message" wx:if="{{item.role === 'ai'}}">
+          <view class="avatar ai-avatar">AI</view>
+          <view class="message-content">
+            <text class="message-text">{{item.content}}</text>
+            <text class="message-time">{{item.time}}</text>
+          </view>
+        </view>
+
+        <!-- 用户消息 -->
+        <view class="message user-message" wx:if="{{item.role === 'user'}}">
+          <view class="message-content">
+            <text class="message-text">{{item.content}}</text>
+            <text class="message-time">{{item.time}}</text>
+          </view>
+          <view class="avatar user-avatar">{{userInfo.nickName ? userInfo.nickName[0] : '用'}}</view>
+        </view>
+
+        <!-- 系统消息 -->
+        <view class="message system-message" wx:if="{{item.role === 'system'}}">
+          <text class="system-text">{{item.content}}</text>
+        </view>
+      </block>
+
+      <!-- 空状态 -->
+      <view class="empty-message" wx:if="{{messages.length === 0}}">
+        开始与AI助理对话...
+      </view>
+
+      <!-- 加载指示器 -->
+      <view class="loading-indicator" wx:if="{{isAIThinking}}">
+        <view class="typing-dots">
+          <text>AI正在思考</text>
+          <view class="dots">
+            <view class="dot"></view>
+            <view class="dot"></view>
+            <view class="dot"></view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 底部固定区域 -->
+  <view class="bottom-section">
+    <!-- 快捷调整选项 -->
+    <view class="quick-actions" wx:if="{{showQuickActions}}">
+      <view class="action-buttons">
+        <button class="quick-btn" bindtap="sendQuickMessage" data-message="把任务安排到上午">上午</button>
+        <button class="quick-btn" bindtap="sendQuickMessage" data-message="把任务安排到下午">下午</button>
+        <button class="quick-btn" bindtap="sendQuickMessage" data-message="把任务时间缩短一些">缩短时间</button>
+        <button class="quick-btn" bindtap="sendQuickMessage" data-message="把任务时间延长一些">延长时间</button>
+      </view>
+    </view>
+
+    <!-- 输入区域 -->
+    <view class="input-area">
+      <view class="input-container">
+        <input 
+          class="message-input" 
+          placeholder="告诉AI您的调整需求..." 
+          value="{{inputMessage}}"
+          bindinput="onInput"
+          bindconfirm="sendMessage"
+          focus="{{autoFocus}}"
+        />
+        <button class="send-btn" bindtap="sendMessage" disabled="{{!inputMessage.trim()}}">
+          <text class="send-icon">↑</text>
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

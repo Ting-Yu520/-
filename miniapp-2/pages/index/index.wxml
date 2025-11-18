@@ -1,0 +1,144 @@
+<!-- pages/index/index.wxml -->
+<view class="index-container">
+  <!-- 骨架屏 -->
+  <view wx:if="{{isLoadingTasks && todayTasks.length === 0}}">
+    <skeleton></skeleton>
+  </view>
+
+  <!-- 主要内容 -->
+  <view wx:if="{{!isLoadingTasks || todayTasks.length > 0}}" class="index-content">
+    <!-- 网络状态指示器 -->
+    <view class="network-status {{isOnline ? 'online' : ''}} {{!isOnline ? 'show' : ''}}">
+      <text>{{isOnline ? '网络已恢复' : '网络连接已断开'}}</text>
+    </view>
+
+    <!-- 缓存状态提示 -->
+    <view wx:if="{{isUsingCachedData}}" class="cache-indicator content-module">
+      <text class="cache-text">正在使用缓存数据</text>
+      <view class="cache-action" bindtap="refreshTasks">点击刷新最新数据</view>
+    </view>
+
+    <!-- 错误状态 -->
+    <view wx:if="{{hasError}}" class="error-state content-module">
+      <view class="error-icon">⚠️</view>
+      <text class="error-text">加载失败</text>
+      <text class="error-desc">{{errorMessage}}</text>
+      <view class="error-actions">
+        <view class="retry-btn" bindtap="retryLoad">重试</view>
+        <view wx:if="{{!isUsingCachedData}}" class="use-cache-btn" bindtap="useCachedData">使用缓存</view>
+      </view>
+    </view>
+
+    <!-- 用户信息区域 - 统一蓝色背景 -->
+    <view class="user-section content-module">
+      <view wx:if="{{isLoggedIn && userInfo.nickName}}" class="user-info-main">
+        <view class="user-avatar">
+          <text class="avatar-text">{{userInfo.nickName ? userInfo.nickName[0] : '用'}}</text>
+        </view>
+        <view class="user-details">
+          <text class="user-name">{{userInfo.nickName || '微信用户'}}</text>
+          <text class="today-date">{{todayDate}}</text>
+        </view>
+        <view class="user-stats">
+          <text class="stats-number">{{completedCount}}/{{totalCount}}</text>
+          <text class="stats-label">今日完成</text>
+        </view>
+      </view>
+      <view wx:else class="login-prompt">
+        <view class="login-info">
+          <text class="login-title">点击登录</text>
+          <text class="login-subtitle">开始规划你的日程</text>
+        </view>
+        <button class="login-button" bindtap="handleLogin">立即登录</button>
+      </view>
+    </view>
+
+    <!-- 任务列表 - 统一宽度设计 -->
+    <view class="tasks-section">
+      <view class="task-list content-module">
+        <view 
+          wx:for="{{todayTasks}}" 
+          wx:key="_id" 
+          class="task-item {{item.status === 'done' ? 'completed' : ''}}"
+          data-task="{{item}}"
+          bindtap="goToTaskDetail"
+        >
+          <view class="task-checkbox {{item.status === 'done' ? 'checked' : ''}}" data-task="{{item}}" bindtap="markTaskDone" catchtap>
+            <view class="checkbox-icon"></view>
+          </view>
+          
+          <view class="task-content">
+            <view class="task-header">
+              <text class="task-title {{item.status === 'done' ? 'completed' : ''}}">
+                {{item.title}}
+              </text>
+              <view class="task-meta">
+                <text class="task-duration">{{item.duration}}分钟</text>
+                <view class="priority-badge priority-{{item.priority}}">
+                  P{{item.priority}}
+                </view>
+              </view>
+            </view>
+            
+            <view class="task-footer">
+              <view class="time-range">
+                <text class="start-time">{{item.scheduled_start}}</text>
+                <text class="time-separator">-</text>
+                <text class="end-time">{{item.scheduled_end}}</text>
+              </view>
+              <view class="task-actions">
+                <view 
+                  class="action-btn chat-btn" 
+                  data-taskid="{{item._id}}" 
+                  bindtap="goToChat"
+                  catchtap
+                >
+                  <text class="btn-icon">💬</text>
+                  <text class="btn-text">协调</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:if="{{todayTasks.length === 0 && isLoggedIn && !isLoadingTasks && !hasError}}" class="empty-state content-module">
+      <view class="empty-content">
+        <text class="empty-emoji">📅</text>
+        <text class="empty-title">今日暂无任务</text>
+        <text class="empty-desc">添加任务开始规划你的一天</text>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more-section">
+      <view wx:if="{{hasMoreTasks}}" class="load-more content-module {{isLoadingMore ? 'loading' : ''}}" bindtap="loadMoreTasks">
+        <view class="load-content">
+          <view class="loading-dots">
+            <view class="dot"></view>
+            <view class="dot"></view>
+            <view class="dot"></view>
+          </view>
+          <text>{{isLoadingMore ? '加载中...' : '加载更多'}}</text>
+        </view>
+      </view>
+      <view wx:else class="no-more content-module">
+        <text>没有更多任务了</text>
+      </view>
+    </view>
+
+    <!-- 底部操作栏 - 统一宽度设计 -->
+    <view class="bottom-actions bottom-action-bar">
+      <button class="action-btn primary" bindtap="goToAddTask">
+        <text class="btn-icon">+</text>
+        <text>添加任务</text>
+      </button>
+      <button class="action-btn secondary" bindtap="goToStats">
+        <text class="btn-icon">📊</text>
+        <text>数据统计</text>
+      </button>
+    </view>
+  </view>
+</view>

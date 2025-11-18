@@ -1,0 +1,34 @@
+<!--components/skeleton/skeleton.wxml-->
+<view class="skeleton-container">
+  <!-- 用户信息骨架 -->
+  <view class="skeleton-user">
+    <view class="skeleton-avatar"></view>
+    <view class="skeleton-text-container">
+      <view class="skeleton-line medium"></view>
+      <view class="skeleton-line short"></view>
+    </view>
+  </view>
+
+  <!-- 统计卡片骨架 -->
+  <view class="skeleton-stats">
+    <view class="skeleton-card"></view>
+    <view class="skeleton-card"></view>
+    <view class="skeleton-card"></view>
+    <view class="skeleton-card"></view>
+  </view>
+
+  <!-- 任务列表骨架 -->
+  <view class="skeleton-tasks">
+    <view class="skeleton-task" wx:for="{{6}}" wx:key="index">
+      <view class="skeleton-task-main">
+        <view class="skeleton-line long"></view>
+        <view class="skeleton-line short"></view>
+        <view class="skeleton-line short"></view>
+      </view>
+      <view class="skeleton-task-actions">
+        <view class="skeleton-button"></view>
+        <view class="skeleton-button"></view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,332 @@
+/* pages/profile/profile.wxss */
+.profile-container {
+  padding: 0;
+  background: #f8f9fa;
+  min-height: 100vh;
+  padding-bottom: 160rpx;
+  box-sizing: border-box;
+}
+
+/* 统一内容模块样式 */
+.content-module {
+  margin: 0 15rpx 16rpx;
+  background: white;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+/* ========== 用户信息卡片 - 统一蓝色风格 ========== */
+.user-card {
+  background: #1890ff;
+  color: white;
+  padding: 30rpx 25rpx;
+}
+
+.user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30rpx;
+}
+
+.avatar-section {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.avatar-circle {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  border: 3rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.avatar-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: white;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.user-id, .register-time {
+  display: block;
+  font-size: 22rpx;
+  opacity: 0.9;
+  margin-bottom: 4rpx;
+}
+
+.login-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2rpx solid rgba(255, 255, 255, 0.5);
+  border-radius: 8rpx;
+  padding: 16rpx 24rpx;
+  font-size: 24rpx;
+}
+
+/* 用户统计网格 */
+.user-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12rpx;
+  padding: 20rpx 10rpx;
+}
+
+.user-stat-item {
+  text-align: center;
+  padding: 16rpx 8rpx;
+}
+
+.user-stat-number {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 6rpx;
+}
+
+.user-stat-label {
+  display: block;
+  font-size: 20rpx;
+  opacity: 0.9;
+}
+
+/* ========== 功能菜单 ========== */
+.menu-section {
+  padding: 30rpx 25rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+  transition: all 0.2s;
+}
+
+.menu-item:active {
+  background: #f8f9fa;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+}
+
+.menu-icon {
+  font-size: 32rpx;
+  margin-right: 20rpx;
+  width: 40rpx;
+  text-align: center;
+}
+
+.menu-text {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.menu-arrow {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* ========== 偏好设置 ========== */
+.preference-section {
+  padding: 30rpx 25rpx;
+}
+
+.setting-switch {
+  transform: scale(0.8);
+}
+
+/* ========== 最近任务 ========== */
+.recent-tasks-section {
+  padding: 30rpx 25rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.see-all {
+  font-size: 24rpx;
+  color: #1890ff;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #1890ff;
+  transition: all 0.2s;
+}
+
+.task-item:active {
+  background: #e6f7ff;
+  transform: scale(0.98);
+}
+
+.task-item.status-done {
+  border-left-color: #52c41a;
+  opacity: 0.8;
+}
+
+.task-item.status-pending {
+  border-left-color: #faad14;
+}
+
+.task-main {
+  flex: 1;
+}
+
+.task-title {
+  display: block;
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 8rpx;
+  line-height: 1.4;
+}
+
+.task-meta {
+  display: flex;
+  gap: 16rpx;
+}
+
+.task-date, .task-time {
+  font-size: 22rpx;
+  color: #666;
+}
+
+.task-status {
+  text-align: right;
+}
+
+.status-text {
+  font-size: 22rpx;
+  font-weight: 500;
+  padding: 6rpx 12rpx;
+  border-radius: 6rpx;
+  background: #f0f0f0;
+  color: #666;
+}
+
+.status-text.done {
+  background: #f6ffed;
+  color: #52c41a;
+}
+
+.status-text.pending {
+  background: #fff7e6;
+  color: #fa8c16;
+}
+
+/* 空状态 */
+.empty-tasks {
+  text-align: center;
+  padding: 60rpx 0;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.empty-text {
+  display: block;
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 30rpx;
+}
+
+.add-task-btn {
+  background: #1890ff;
+  color: white;
+  border: none;
+  padding: 18rpx 36rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+/* ========== 底部操作栏 ========== */
+.profile-bottom-bar {
+  display: flex;
+  gap: 16rpx;
+}
+
+.support-btn, .logout-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 24rpx;
+  border: none;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+.support-btn {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.logout-btn {
+  background: #ff4d4f;
+  color: white;
+}
+
+.support-icon, .logout-icon {
+  font-size: 28rpx;
+}

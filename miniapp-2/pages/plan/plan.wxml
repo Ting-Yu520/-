@@ -1,0 +1,145 @@
+<!-- pages/plan/plan.wxml -->
+<view class="container">
+  <!-- 宽度对齐的日期选择器 -->
+  <view class="aligned-date-section">
+    <view class="date-picker-aligned">
+      <view class="date-nav-aligned">
+        <view class="nav-btn-aligned" bindtap="goToPreviousDay">
+          <text class="nav-icon-aligned">‹</text>
+        </view>
+        
+        <picker mode="date" value="{{currentDate}}" bindchange="onDateChange">
+          <view class="date-display-aligned">
+            <text class="date-main-aligned">{{formattedDate}}</text>
+            <text class="date-week-aligned">{{weekday}}</text>
+            <text class="date-tag-aligned">{{isToday ? '今天' : isTomorrow ? '明天' : ''}}</text>
+          </view>
+        </picker>
+        
+        <view class="nav-btn-aligned" bindtap="goToNextDay">
+          <text class="nav-icon-aligned">›</text>
+        </view>
+      </view>
+      
+      <view class="quick-actions-aligned">
+        <view class="quick-action-aligned {{isToday ? 'active' : ''}}" bindtap="goToToday">
+          <text>今天</text>
+        </view>
+        <view class="quick-action-aligned {{isTomorrow ? 'active' : ''}}" bindtap="goToTomorrow">
+          <text>明天</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 宽度对齐的日程概览 -->
+  <view class="aligned-stats-section">
+    <view class="stats-grid-aligned">
+      <view class="stat-item-aligned">
+        <text class="stat-number-aligned">{{totalTasks}}</text>
+        <text class="stat-label-aligned">总任务</text>
+      </view>
+      <view class="stat-item-aligned">
+        <text class="stat-number-aligned">{{completedTasks}}</text>
+        <text class="stat-label-aligned">已完成</text>
+      </view>
+      <view class="stat-item-aligned">
+        <text class="stat-number-aligned">{{totalDuration}}</text>
+        <text class="stat-label-aligned">总时长</text>
+      </view>
+      <view class="stat-item-aligned">
+        <text class="stat-number-aligned">{{completionRate}}%</text>
+        <text class="stat-label-aligned">完成率</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 时间线模块（保持不变） -->
+  <view class="aligned-timeline-section">
+    <view class="timeline-header-aligned">
+      <text class="timeline-title-aligned">时间线</text>
+      <button class="ai-optimize-btn-aligned" bindtap="generateAISchedule">
+        <text class="ai-icon-aligned">🤖</text>
+        <text>AI优化</text>
+      </button>
+    </view>
+
+    <view class="timeline-content-aligned">
+      <!-- 空状态 -->
+      <view wx:if="{{schedule.length === 0 || totalTasks === 0}}" class="empty-state-aligned">
+        <view class="empty-content-aligned">
+          <text class="empty-icon-aligned">📅</text>
+          <text class="empty-title-aligned">今天还没有安排</text>
+          <text class="empty-desc-aligned">添加任务后，AI会帮您生成合理的日程安排</text>
+          <button class="add-first-btn-aligned" bindtap="goToAddTask">添加第一个任务</button>
+        </view>
+      </view>
+
+      <!-- 时间线内容 -->
+      <view wx:else class="timeline-aligned">
+        <block wx:for="{{schedule}}" wx:key="timeSlot" wx:for-index="slotIndex">
+          <view class="time-slot-aligned">
+            <!-- 时间标记 -->
+            <view class="time-marker-aligned">
+              <text class="time-text-aligned">{{item.timeSlot}}</text>
+            </view>
+            
+            <!-- 任务列表 -->
+            <view class="tasks-container-aligned">
+              <block wx:for="{{item.tasks}}" wx:for-item="task" wx:key="_id">
+                <view class="task-card-aligned status-{{task.status}}" bindtap="goToTaskDetail" data-taskid="{{task._id}}">
+                  <view class="task-time-info-aligned">
+                    <text class="time-range-aligned">{{task.scheduled_start}} - {{task.scheduled_end}}</text>
+                    <text class="duration-aligned">{{task.duration}}分钟</text>
+                  </view>
+                  
+                  <view class="task-content-aligned">
+                    <view class="task-header-aligned">
+                      <text class="task-title-aligned">{{task.title}}</text>
+                      <view class="priority-badge-aligned priority-{{task.priority}}">
+                        P{{task.priority}}
+                      </view>
+                    </view>
+                    
+                    <view class="task-actions-aligned">
+                      <button 
+                        class="action-btn-aligned complete {{task.status === 'done' ? 'completed' : ''}}" 
+                        bindtap="toggleTaskStatus" 
+                        data-taskid="{{task._id}}"
+                        data-status="{{task.status}}"
+                        catchtap=""
+                      >
+                        {{task.status === 'done' ? '✓ 已完成' : '标记完成'}}
+                      </button>
+                      
+                      <button class="action-btn-aligned adjust" bindtap="adjustTask" data-taskid="{{task._id}}" catchtap="">
+                        调整
+                      </button>
+                    </view>
+                  </view>
+                </view>
+              </block>
+              
+              <!-- 空闲时间 -->
+              <view wx:if="{{item.tasks.length === 0 && slotIndex > 0}}" class="free-time-aligned">
+                <view class="free-time-content-aligned">
+                  <text class="free-icon-aligned">⏳</text>
+                  <text class="free-text-aligned">空闲时间</text>
+                  <text class="free-duration-aligned">{{calculateFreeTime(item.timeSlot, slotIndex)}}分钟</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar-aligned">
+    <button class="add-task-btn-aligned" bindtap="goToAddTask">
+      <text class="add-icon-aligned">+</text>
+      <text>添加任务</text>
+    </button>
+  </view>
+</view>

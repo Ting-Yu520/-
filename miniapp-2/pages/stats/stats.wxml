@@ -1,0 +1,115 @@
+<!--pages/stats/stats.wxml-->
+<view class="stats-container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">数据统计</text>
+    <text class="page-subtitle">了解你的任务完成情况</text>
+  </view>
+
+  <!-- 时间范围选择 -->
+  <view class="range-selector">
+    <view 
+      class="range-item {{selectedRange === 'week' ? 'active' : ''}}"
+      data-range="week"
+      bindtap="onRangeChange"
+    >
+      本周
+    </view>
+    <view 
+      class="range-item {{selectedRange === 'month' ? 'active' : ''}}"
+      data-range="month"
+      bindtap="onRangeChange"
+    >
+      本月
+    </view>
+    <view 
+      class="range-item {{selectedRange === 'year' ? 'active' : ''}}"
+      data-range="year"
+      bindtap="onRangeChange"
+    >
+      今年
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{isLoading}}" class="loading-container">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载数据中...</text>
+  </view>
+
+  <!-- 统计概览 -->
+  <view wx:if="{{!isLoading && hasData}}" class="stats-overview">
+    <view class="stat-card">
+      <view class="stat-value">{{chartData.completion.completionRate || 0}}%</view>
+      <view class="stat-label">完成率</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-value">{{chartData.completion.completed || 0}}</view>
+      <view class="stat-label">已完成</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-value">{{chartData.completion.total || 0}}</view>
+      <view class="stat-label">总任务</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-value">{{chartData.timeUsage.totalDuration || 0}}</view>
+      <view class="stat-label">总时长(分钟)</view>
+    </view>
+  </view>
+
+  <!-- 图表区域 -->
+  <view wx:if="{{!isLoading && hasData}}" class="charts-section">
+    
+    <!-- 完成率趋势图 -->
+    <view class="chart-container completion-chart-container">
+      <view class="chart-title">
+        {{selectedRange === 'week' ? '本周' : selectedRange === 'month' ? '本月' : '今年'}}完成率趋势
+      </view>
+      <view class="chart-canvas-container">
+        <canvas 
+          canvas-id="completionChart" 
+          class="chart-canvas"
+          id="completionChart"
+        ></canvas>
+      </view>
+      <view class="chart-note">
+        {{selectedRange === 'year' ? '按月统计完成率' : '按日统计完成率'}}
+      </view>
+    </view>
+
+    <!-- 任务分类分布 -->
+    <view class="chart-container">
+      <view class="chart-title">任务分类分布</view>
+      <view class="chart-canvas-container">
+        <canvas 
+          canvas-id="categoryChart" 
+          class="chart-canvas"
+          id="categoryChart"
+        ></canvas>
+      </view>
+      <view class="chart-note">基于已完成任务的分类统计</view>
+    </view>
+
+    <!-- 时间使用统计 -->
+    <view class="chart-container">
+      <view class="chart-title">时间使用统计</view>
+      <view class="chart-canvas-container">
+        <canvas 
+          canvas-id="timeChart" 
+          class="chart-canvas"
+          id="timeChart"
+        ></canvas>
+      </view>
+      <view class="chart-note">各优先级任务耗时分布(分钟)</view>
+    </view>
+
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{!isLoading && !hasData}}" class="empty-state">
+    <text class="empty-text">暂无统计数据</text>
+    <text class="empty-desc">完成任务后这里会显示详细统计信息</text>
+    <button class="retry-button" bindtap="onRefresh">重新加载</button>
+  </view>
+
+</view>

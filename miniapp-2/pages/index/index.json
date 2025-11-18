@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "skeleton": "/components/skeleton/skeleton"
+  },
+  "navigationBarTitleText": "AI日程助手",
+  "enablePullDownRefresh": true
+}

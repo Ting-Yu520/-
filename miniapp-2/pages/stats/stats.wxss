@@ -1,0 +1,287 @@
+/* pages/stats/stats.wxss  */
+.stats-container {
+  padding: 20rpx;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+/* 页面标题  */
+.page-header {
+  text-align: center;
+  margin-bottom: 30rpx;
+  padding-top: 20rpx;
+}
+
+.page-title {
+  display: block;
+  font-size: 42rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.page-subtitle {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 时间范围选择器  */
+.range-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 6rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.08);
+}
+
+.range-item {
+  padding: 20rpx 32rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #666;
+  transition: all 0.3s ease;
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+}
+
+.range-item.active {
+  background: #1890ff;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.3);
+}
+
+/* 统计概览  */
+.stats-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+  margin-bottom: 30rpx;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 32rpx 20rpx;
+  text-align: center;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  border: 1rpx solid #f0f0f0;
+  transition: transform 0.2s ease;
+}
+
+.stat-card:active {
+  transform: scale(0.98);
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #1890ff;
+  margin-bottom: 12rpx;
+  text-shadow: 0 2rpx 4rpx rgba(24, 144, 255, 0.1);
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #666;
+  font-weight: 500;
+}
+
+/* 图表区域  */
+.charts-section {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  border: 1rpx solid #f0f0f0;
+}
+
+.chart-container {
+  margin-bottom: 50rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  padding: 25rpx;
+  border: 1rpx solid #e8e8e8;
+  min-height: 500rpx; 
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container:last-child {
+  margin-bottom: 0;
+}
+
+.chart-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 25rpx;
+  text-align: center;
+  padding-bottom: 15rpx;
+  border-bottom: 1rpx solid #e8e8e8;
+}
+
+/* 图表画布容器  */
+.chart-canvas-container {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 450rpx; 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* 置顶对齐 */
+  background: #fff;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.chart-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* 完成率趋势图容器 */
+.completion-chart-container .chart-canvas-container {
+  height: 450rpx;
+}
+
+/* 饼图容器 */
+.chart-container:nth-child(2) .chart-canvas-container {
+  height: 480rpx;
+}
+
+/* 时间统计图容器 */
+.chart-container:nth-child(3) .chart-canvas-container {
+  height: 420rpx;
+}
+
+/* 加载状态  */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 500rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  margin: 20rpx 0;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.loading-spinner {
+  width: 80rpx;
+  height: 80rpx;
+  border: 6rpx solid #e8e8e8;
+  border-top: 6rpx solid #1890ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 30rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: #666;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+/* 空状态  */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 150rpx 40rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  margin: 20rpx 0;
+  text-align: center;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  min-height: 500rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  font-weight: 500;
+}
+
+.empty-desc {
+  font-size: 26rpx;
+  color: #999;
+  line-height: 1.5;
+  margin-bottom: 40rpx;
+}
+
+.retry-button {
+  background: #1890ff;
+  color: white;
+  border: none;
+  padding: 20rpx 40rpx;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+}
+
+/* 响应式调整 */
+@media (max-width: 750rpx) {
+  .stats-overview {
+    grid-template-columns: 1fr;
+    gap: 16rpx;
+  }
+  
+  .chart-canvas-container {
+    height: 400rpx;
+  }
+  
+  .completion-chart-container .chart-canvas-container {
+    height: 400rpx;
+  }
+  
+  .chart-container:nth-child(2) .chart-canvas-container {
+    height: 430rpx;
+  }
+  
+  .chart-container:nth-child(3) .chart-canvas-container {
+    height: 370rpx;
+  }
+  
+  .range-item {
+    padding: 20rpx 24rpx;
+    font-size: 26rpx;
+  }
+  
+  .stat-card {
+    padding: 28rpx 20rpx;
+  }
+  
+  .stat-value {
+    font-size: 44rpx;
+  }
+  
+  .chart-container {
+    min-height: 450rpx;
+    padding: 20rpx;
+    margin-bottom: 40rpx;
+  }
+}
+
+/* 添加图表说明文字 */
+.chart-note {
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+  margin-top: 20rpx;
+  line-height: 1.4;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #e8e8e8;
+}

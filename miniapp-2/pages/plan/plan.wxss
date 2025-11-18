@@ -1,0 +1,473 @@
+/* pages/plan/plan.wxss */
+.container {
+  padding: 0;
+  background: #f8f9fa;
+  min-height: 100vh;
+  padding-bottom: 140rpx;
+  box-sizing: border-box;
+}
+
+/* ========== 统一宽度标准 ========== */
+/* 所有内容模块使用相同的左右边距 */
+.content-module {
+  margin: 0 15rpx 16rpx;
+  background: white;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+/* ========== 宽度对齐的日期选择器 ========== */
+.aligned-date-section {
+  margin: 0 15rpx 16rpx;
+  background: white;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+.date-picker-aligned {
+  padding: 24rpx 25rpx;
+}
+
+.date-nav-aligned {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.nav-btn-aligned {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 10rpx;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.nav-btn-aligned:active {
+  background: #1890ff;
+  transform: scale(0.95);
+}
+
+.nav-btn-aligned:active .nav-icon-aligned {
+  color: white;
+}
+
+.nav-icon-aligned {
+  font-size: 28rpx;
+  color: #666;
+  font-weight: bold;
+}
+
+.date-display-aligned {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  margin: 0 16rpx;
+}
+
+.date-main-aligned {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4rpx;
+}
+
+.date-week-aligned {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 4rpx;
+}
+
+.date-tag-aligned {
+  display: block;
+  font-size: 20rpx;
+  color: #1890ff;
+  font-weight: 500;
+}
+
+.quick-actions-aligned {
+  display: flex;
+  gap: 16rpx;
+}
+
+.quick-action-aligned {
+  flex: 1;
+  padding: 16rpx;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.quick-action-aligned.active {
+  background: #1890ff;
+  color: white;
+}
+
+.quick-action-aligned:active {
+  transform: scale(0.95);
+}
+
+/* ========== 宽度对齐的日程概览 ========== */
+.aligned-stats-section {
+  margin: 0 15rpx 16rpx;
+  background: white;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+.stats-grid-aligned {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding: 24rpx 20rpx;
+}
+
+.stat-item-aligned {
+  text-align: center;
+  padding: 20rpx 8rpx;
+  background: #f8f9fa;
+  margin: 0 6rpx;
+  border-radius: 10rpx;
+  transition: all 0.2s;
+}
+
+.stat-item-aligned:active {
+  background: #1890ff;
+  transform: scale(0.98);
+}
+
+.stat-item-aligned:active .stat-number-aligned,
+.stat-item-aligned:active .stat-label-aligned {
+  color: white;
+}
+
+.stat-number-aligned {
+  display: block;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #1890ff;
+  margin-bottom: 6rpx;
+}
+
+.stat-label-aligned {
+  display: block;
+  font-size: 22rpx;
+  color: #666;
+}
+
+/* ========== 宽度对齐的时间线 ========== */
+.aligned-timeline-section {
+  margin: 0 15rpx 20rpx;
+  background: white;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+.timeline-header-aligned {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 25rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.timeline-title-aligned {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.ai-optimize-btn-aligned {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 20rpx;
+  background: #f0f7ff;
+  border: 1rpx solid #1890ff;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: #1890ff;
+  white-space: nowrap;
+}
+
+.ai-icon-aligned {
+  font-size: 24rpx;
+}
+
+.timeline-content-aligned {
+  min-height: 400rpx;
+}
+
+/* 空状态 */
+.empty-state-aligned {
+  padding: 60rpx 25rpx;
+}
+
+.empty-content-aligned {
+  text-align: center;
+}
+
+.empty-icon-aligned {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.empty-title-aligned {
+  display: block;
+  font-size: 26rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+  font-weight: 500;
+}
+
+.empty-desc-aligned {
+  display: block;
+  font-size: 22rpx;
+  color: #666;
+  margin-bottom: 28rpx;
+  line-height: 1.4;
+}
+
+.add-first-btn-aligned {
+  background: #1890ff;
+  color: white;
+  border: none;
+  padding: 18rpx 36rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+/* ========== 对齐的时间线布局 ========== */
+.timeline-aligned {
+  padding: 0 20rpx 20rpx;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.time-slot-aligned {
+  margin-bottom: 8rpx;
+  width: 100%;
+}
+
+.time-marker-aligned {
+  margin: 20rpx 0 12rpx;
+  padding-left: 0;
+}
+
+.time-text-aligned {
+  font-size: 24rpx;
+  color: #999;
+  font-weight: 500;
+}
+
+.tasks-container-aligned {
+  margin-left: 0;
+  width: 100%;
+}
+
+/* 对齐的任务卡片 */
+.task-card-aligned {
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 18rpx;
+  margin-bottom: 12rpx;
+  border-left: 6rpx solid #1890ff;
+  transition: all 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.task-card-aligned.status-done {
+  border-left-color: #52c41a;
+  opacity: 0.8;
+}
+
+.task-card-aligned.status-pending {
+  border-left-color: #faad14;
+}
+
+.task-card-aligned:active {
+  background: #e6f7ff;
+  transform: scale(0.98);
+}
+
+.task-time-info-aligned {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.time-range-aligned {
+  font-size: 24rpx;
+  color: #1890ff;
+  font-weight: 500;
+}
+
+.duration-aligned {
+  font-size: 22rpx;
+  color: #666;
+  background: rgba(24, 144, 255, 0.1);
+  padding: 4rpx 10rpx;
+  border-radius: 6rpx;
+}
+
+.task-content-aligned {
+  width: 100%;
+}
+
+.task-header-aligned {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+  width: 100%;
+}
+
+.task-title-aligned {
+  flex: 1;
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+  margin-right: 12rpx;
+  line-height: 1.4;
+}
+
+.priority-badge-aligned {
+  padding: 6rpx 12rpx;
+  border-radius: 6rpx;
+  font-size: 20rpx;
+  color: white;
+  font-weight: bold;
+  min-width: 50rpx;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.priority-1 { background: #52c41a; }
+.priority-2 { background: #87d068; }
+.priority-3 { background: #faad14; }
+.priority-4 { background: #fa8c16; }
+.priority-5 { background: #f5222d; }
+
+.task-actions-aligned {
+  display: flex;
+  gap: 10rpx;
+  width: 100%;
+}
+
+.action-btn-aligned {
+  flex: 1;
+  padding: 12rpx;
+  border: none;
+  border-radius: 6rpx;
+  font-size: 22rpx;
+  text-align: center;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.action-btn-aligned.complete {
+  background: #1890ff;
+  color: white;
+}
+
+.action-btn-aligned.complete.completed {
+  background: #52c41a;
+}
+
+.action-btn-aligned.adjust {
+  background: transparent;
+  border: 1rpx solid #1890ff;
+  color: #1890ff;
+}
+
+.action-btn-aligned:active {
+  transform: scale(0.95);
+}
+
+/* 空闲时间 */
+.free-time-aligned {
+  margin-bottom: 12rpx;
+  width: 100%;
+}
+
+.free-time-content-aligned {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  padding: 18rpx;
+  background: #f0f7ff;
+  border: 1rpx dashed #1890ff;
+  border-radius: 8rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.free-icon-aligned {
+  font-size: 22rpx;
+}
+
+.free-text-aligned {
+  font-size: 22rpx;
+  color: #1890ff;
+  font-weight: 500;
+}
+
+.free-duration-aligned {
+  font-size: 20rpx;
+  color: #999;
+}
+
+/* ========== 底部操作栏 ========== */
+.bottom-bar-aligned {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 20rpx 15rpx;
+  border-top: 1rpx solid #f0f0f0;
+  box-shadow: 0 -4rpx 20rpx rgba(0,0,0,0.08);
+  z-index: 100;
+}
+
+.add-task-btn-aligned {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  padding: 26rpx;
+  background: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  box-shadow: 0 4rpx 20rpx rgba(24, 144, 255, 0.3);
+}
+
+.add-icon-aligned {
+  font-size: 34rpx;
+  font-weight: bold;
+}

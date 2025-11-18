@@ -1,0 +1,243 @@
+/* pages/addTask/addTask.wxss */
+.container {
+  padding: 20rpx;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* 紧凑头部 */
+.header {
+  text-align: center;
+  margin-bottom: 30rpx;
+  padding: 20rpx 0;
+}
+
+.title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.subtitle {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 表单容器 */
+.task-form {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+.form-group {
+  margin-bottom: 32rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+/* 内嵌输入组 */
+.form-input-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  height: 80rpx;
+  border: 2rpx solid #e8e8e8;
+}
+
+.input-label {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  min-width: 140rpx;
+}
+
+.embedded-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 28rpx;
+  color: #333;
+  height: 100%;
+}
+
+.embedded-input::placeholder {
+  color: #999;
+}
+
+/* 时长输入组 */
+.duration-input-group {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.duration-input {
+  text-align: right;
+  margin-right: 16rpx;
+}
+
+.duration-unit {
+  font-size: 24rpx;
+  color: #666;
+  min-width: 60rpx;
+}
+
+/* 优先级网格 */
+.priority-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.priority-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64rpx;
+  border: 2rpx solid #e8e8e8;
+  border-radius: 8rpx;
+  background: #f8f9fa;
+  transition: all 0.2s;
+}
+
+.priority-item.active {
+  border-color: transparent;
+  color: white;
+  transform: scale(0.98);
+}
+
+.priority-text {
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+/* 优先级颜色 */
+.priority-item.low { background: #52c41a; }
+.priority-item.medium-low { background: #87d068; }
+.priority-item.medium { background: #faad14; }
+.priority-item.high { background: #fa8c16; }
+.priority-item.urgent { background: #f5222d; }
+
+/* 日期选择器 */
+.date-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.date-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.calendar-icon {
+  font-size: 28rpx;
+}
+
+/* 提交按钮 */
+.submit-btn {
+  width: 100%;
+  height: 88rpx;
+  background: #c0c0c0;
+  color: white;
+  border: none;
+  border-radius: 12rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-top: 20rpx;
+  transition: all 0.3s;
+}
+
+.submit-btn.active {
+  background: #1890ff;
+  box-shadow: 0 4rpx 16rpx rgba(24, 144, 255, 0.3);
+}
+
+.submit-btn.active:active {
+  background: #096dd9;
+  transform: scale(0.98);
+}
+
+.submit-btn.loading {
+  background: #91d5ff;
+}
+
+/* 快捷模板 */
+.quick-templates {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+.section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+
+.template-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.template-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 16rpx;
+  border: 2rpx solid #e8e8e8;
+  border-radius: 12rpx;
+  background: #f8f9fa;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.template-card:active {
+  background: #1890ff;
+  border-color: #1890ff;
+  transform: scale(0.96);
+}
+
+.template-card:active .template-icon,
+.template-card:active .template-title,
+.template-card:active .template-duration {
+  color: white;
+}
+
+.template-icon {
+  font-size: 36rpx;
+  margin-bottom: 8rpx;
+}
+
+.template-title {
+  font-size: 24rpx;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 4rpx;
+}
+
+.template-duration {
+  font-size: 20rpx;
+  color: #666;
+}

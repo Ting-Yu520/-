@@ -1,0 +1,142 @@
+<!-- pages/taskDetail/taskDetail.wxml -->
+<view class="container">
+  <!-- 自定义导航栏 -->
+  <view class="custom-navbar">
+    <view class="nav-left">
+      <view class="back-btn" bindtap="goBack">
+        <text class="back-icon">‹</text>
+      </view>
+    </view>
+    <view class="nav-title">任务详情</view>
+    <view class="nav-right"></view>
+  </view>
+
+  <!-- 错误状态 -->
+  <view class="error-state" wx:if="{{hasError}}">
+    <view class="error-content">
+      <text class="error-icon">⚠️</text>
+      <text class="error-title">加载失败</text>
+      <text class="error-desc">{{errorMessage || '无法加载任务详情'}}</text>
+      <text class="error-taskid" wx:if="{{taskId}}">任务ID: {{taskId}}</text>
+      <button class="retry-btn" bindtap="retryLoad">重试加载</button>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{isLoading && !hasError}}">
+    <view class="loading-content">
+      <text class="loading-icon">⏳</text>
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+
+  <!-- 正常内容 -->
+  <scroll-view class="content-scroll" scroll-y="true" wx:if="{{!isLoading && !hasError}}">
+    <!-- 任务基本信息卡片 -->
+    <view class="task-basic-card">
+      <view class="task-header-section">
+        <text class="task-title-main">{{task.title}}</text>
+        <view class="priority-badge-main priority-{{task.priority}}">
+          P{{task.priority}}
+        </view>
+      </view>
+
+      <view class="task-meta-grid">
+        <view class="meta-item">
+          <text class="meta-icon">⏱️</text>
+          <view class="meta-content">
+            <text class="meta-label">任务时长</text>
+            <text class="meta-value">{{task.duration}}分钟</text>
+          </view>
+        </view>
+
+        <view class="meta-item">
+          <text class="meta-icon">📅</text>
+          <view class="meta-content">
+            <text class="meta-label">计划日期</text>
+            <text class="meta-value">{{task.date}}</text>
+          </view>
+        </view>
+
+        <view class="meta-item">
+          <text class="meta-icon">🕒</text>
+          <view class="meta-content">
+            <text class="meta-label">安排时间</text>
+            <text class="meta-value" wx:if="{{task.scheduled_start && task.scheduled_end}}">
+              {{task.scheduled_start}} - {{task.scheduled_end}}
+            </text>
+            <text class="meta-value no-schedule" wx:else>未安排</text>
+          </view>
+        </view>
+
+        <view class="meta-item">
+          <text class="meta-icon">📊</text>
+          <view class="meta-content">
+            <text class="meta-label">任务状态</text>
+            <text class="meta-value status-{{task.status}}">
+              {{task.status === 'done' ? '已完成' : task.status === 'in_progress' ? '进行中' : '待开始'}}
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 时间安排信息 -->
+    <view class="schedule-card">
+      <view class="card-header">
+        <text class="card-title">时间信息</text>
+      </view>
+      <view class="schedule-content">
+        <view class="schedule-item">
+          <text class="schedule-label">创建时间</text>
+          <text class="schedule-value">{{formattedTime.created_at || '--'}}</text>
+        </view>
+        <view class="schedule-item" wx:if="{{task.completed_at}}">
+          <text class="schedule-label">完成时间</text>
+          <text class="schedule-value">{{formattedTime.completed_at || '--'}}</text>
+        </view>
+        <view class="schedule-item">
+          <text class="schedule-label">更新时间</text>
+          <text class="schedule-value">{{formattedTime.updated_at || '--'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 任务描述 -->
+    <view class="description-card" wx:if="{{task.description}}">
+      <view class="card-header">
+        <text class="card-title">任务描述</text>
+      </view>
+      <view class="description-content">
+        <text class="description-text">{{task.description}}</text>
+      </view>
+    </view>
+
+    <!-- 完成状态提示 -->
+    <view class="completion-banner" wx:if="{{task.status === 'done'}}">
+      <text class="completion-icon">🎉</text>
+      <view class="completion-text">
+        <text class="completion-title">任务已完成！</text>
+        <text class="completion-subtitle">继续保持优秀的表现！</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 操作按钮区域 - 固定在底部 -->
+  <view class="action-section" wx:if="{{!isLoading && !hasError}}">
+    <button class="action-btn primary" bindtap="toggleTaskStatus">
+      <text class="btn-icon">{{task.status === 'done' ? '↻' : '✓'}}</text>
+      <text class="btn-text">{{task.status === 'done' ? '恢复任务' : '标记完成'}}</text>
+    </button>
+
+    <button class="action-btn outline" bindtap="editTask">
+      <text class="btn-icon">✏️</text>
+      <text class="btn-text">编辑任务</text>
+    </button>
+
+    <button class="action-btn secondary" bindtap="goToChat" wx:if="{{task.status !== 'done'}}">
+      <text class="btn-icon">🤖</text>
+      <text class="btn-text">AI协调</text>
+    </button>
+  </view>
+</view>

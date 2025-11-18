@@ -1,0 +1,142 @@
+<!-- pages/profile/profile.wxml -->
+<view class="profile-container">
+  <!-- 用户信息卡片 - 统一蓝色背景 -->
+  <view class="user-card content-module">
+    <view class="user-header">
+      <view class="avatar-section">
+        <view class="avatar-circle">
+          <text class="avatar-text">{{userInfo.nickName ? userInfo.nickName[0] : '用'}}</text>
+        </view>
+        <view class="user-info">
+          <text class="user-name">{{userInfo.nickName || '微信用户'}}</text>
+          <text class="user-id">ID: {{openid ? openid.substring(0, 8) + '...' : '加载中...'}}</text>
+          <text class="register-time">注册时间: {{formatDate(registerTime)}}</text>
+        </view>
+      </view>
+      <button wx:if="{{!userInfo.nickName}}" class="login-btn" bindtap="handleLogin">立即登录</button>
+    </view>
+    
+    <!-- 用户统计 -->
+    <view class="user-stats-grid">
+      <view class="user-stat-item">
+        <text class="user-stat-number">{{totalTasks}}</text>
+        <text class="user-stat-label">总任务数</text>
+      </view>
+      <view class="user-stat-item">
+        <text class="user-stat-number">{{completedTasks}}</text>
+        <text class="user-stat-label">已完成</text>
+      </view>
+      <view class="user-stat-item">
+        <text class="user-stat-number">{{completionRate}}%</text>
+        <text class="user-stat-label">完成率</text>
+      </view>
+      <view class="user-stat-item">
+        <text class="user-stat-number">{{totalDuration}}</text>
+        <text class="user-stat-label">总时长</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section content-module">
+    <view class="section-title">功能设置</view>
+    <view class="menu-list">
+      <view class="menu-item" bindtap="goToPlan">
+        <view class="menu-left">
+          <text class="menu-icon">📅</text>
+          <text class="menu-text">我的计划</text>
+        </view>
+        <text class="menu-arrow">›</text>
+      </view>
+      
+      <view class="menu-item" bindtap="goToStats">
+        <view class="menu-left">
+          <text class="menu-icon">📊</text>
+          <text class="menu-text">数据统计</text>
+        </view>
+        <text class="menu-arrow">›</text>
+      </view>
+      
+      <view class="menu-item" bindtap="goToAddTask">
+        <view class="menu-left">
+          <text class="menu-icon">➕</text>
+          <text class="menu-text">添加任务</text>
+        </view>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 偏好设置 -->
+  <view class="preference-section content-module">
+    <view class="section-title">偏好设置</view>
+    <view class="menu-list">
+      <view class="menu-item">
+        <view class="menu-left">
+          <text class="menu-icon">🌙</text>
+          <text class="menu-text">深色模式</text>
+        </view>
+        <switch class="setting-switch" checked="{{false}}" disabled />
+      </view>
+      
+      <view class="menu-item">
+        <view class="menu-left">
+          <text class="menu-icon">🔔</text>
+          <text class="menu-text">消息提醒</text>
+        </view>
+        <switch class="setting-switch" checked="{{true}}" />
+      </view>
+      
+      <view class="menu-item">
+        <view class="menu-left">
+          <text class="menu-icon">🤖</text>
+          <text class="menu-text">AI优化建议</text>
+        </view>
+        <switch class="setting-switch" checked="{{true}}" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近任务 -->
+  <view class="recent-tasks-section content-module">
+    <view class="section-header">
+      <text class="section-title">最近任务</text>
+      <text class="see-all" bindtap="goToPlan">查看全部</text>
+    </view>
+    
+    <view class="task-list">
+      <block wx:for="{{recentTasks}}" wx:key="_id">
+        <view class="task-item status-{{item.status}}" bindtap="goToTaskDetail" data-taskid="{{item._id}}">
+          <view class="task-main">
+            <text class="task-title">{{item.title}}</text>
+            <view class="task-meta">
+              <text class="task-date">{{formatTaskDate(item.date)}}</text>
+              <text class="task-time">{{item.scheduled_start}} - {{item.scheduled_end}}</text>
+            </view>
+          </view>
+          <view class="task-status">
+            <text class="status-text {{item.status}}">{{getStatusText(item.status)}}</text>
+          </view>
+        </view>
+      </block>
+      
+      <view wx:if="{{recentTasks.length === 0}}" class="empty-tasks">
+        <text class="empty-icon">📝</text>
+        <text class="empty-text">还没有任务记录</text>
+        <button class="add-task-btn" bindtap="goToAddTask">去添加任务</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="profile-bottom-bar bottom-action-bar">
+    <button class="support-btn" bindtap="contactSupport">
+      <text class="support-icon">💁</text>
+      <text>联系客服</text>
+    </button>
+    <button class="logout-btn" bindtap="showLogoutConfirm" wx:if="{{userInfo.nickName}}">
+      <text class="logout-icon">🚪</text>
+      <text>退出登录</text>
+    </button>
+  </view>
+</view>

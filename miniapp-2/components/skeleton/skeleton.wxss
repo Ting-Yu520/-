@@ -1,0 +1,104 @@
+/* components/skeleton/skeleton.wxss */
+.skeleton-container {
+  padding: 20rpx;
+}
+
+.skeleton-user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+}
+
+.skeleton-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 50%, #f2f2f2 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  margin-right: 30rpx;
+}
+
+.skeleton-text-container {
+  flex: 1;
+}
+
+.skeleton-line {
+  height: 30rpx;
+  background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 50%, #f2f2f2 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 6rpx;
+  margin-bottom: 15rpx;
+}
+
+.skeleton-line.medium {
+  width: 60%;
+}
+
+.skeleton-line.short {
+  width: 40%;
+}
+
+.skeleton-line.long {
+  width: 90%;
+}
+
+.skeleton-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+  margin-bottom: 30rpx;
+}
+
+.skeleton-card {
+  height: 120rpx;
+  background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 50%, #f2f2f2 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 16rpx;
+}
+
+.skeleton-tasks {
+  margin-bottom: 30rpx;
+}
+
+.skeleton-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.skeleton-task-main {
+  flex: 1;
+}
+
+.skeleton-task-actions {
+  display: flex;
+  gap: 10rpx;
+}
+
+.skeleton-button {
+  width: 120rpx;
+  height: 60rpx;
+  background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 50%, #f2f2f2 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 10rpx;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
