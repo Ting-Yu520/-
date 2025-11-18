@@ -33,8 +33,9 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wxfe478db3f5ffc0d0",
+  "appid": "你的微信云Id",
   "editorSetting": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
   "cloudfunctionRoot": "cloudfunctions/"
+
 }
